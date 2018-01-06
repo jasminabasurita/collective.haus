@@ -1,21 +1,30 @@
 import React from "react"
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from "react-router-dom"
+import { connect } from "react-redux"
+import { Route, Switch, Redirect } from "react-router-dom"
 import Navbar from "./Navbar"
 import Login from "./Login"
+import UserBillz from "./UserBillz"
+import SignUp from "./SignUp"
 
-export default function Root() {
-  const isLoggedIn = !!this.props.currentUser.id
-  return (
-    <Router>
-      <div>
-        <Navbar />
-        {!isLoggedIn && <Redirect path="/login" component={Login} />}
-      </div>
-    </Router>
+function Root(props) {
+  const isLoggedIn = !!props.currentUser.id
+  return isLoggedIn ? (
+    <div>
+      <Navbar />
+      <Switch>
+        <Route path="/" component={UserBillz} />
+        <Redirect to="/" />
+      </Switch>
+    </div>
+  ) : (
+    <Switch>
+      <Route exact path="/signup" component={SignUp} />
+      <Route path="/" component={Login} />
+    </Switch>
   )
 }
+
+const mapState = ({ currentUser }) => ({ currentUser })
+const mapDispatch = (dispatch, ownProps) => ({})
+
+export default connect(mapState, mapDispatch)(Root)

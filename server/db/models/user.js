@@ -1,6 +1,5 @@
 const Sequelize = require("sequelize")
 const db = require("../_db.js")
-const bcrypt = require("bcrypt")
 
 const User = db.define("user", {
   firstName: {
@@ -20,7 +19,7 @@ const User = db.define("user", {
     }
   },
   email: {
-    type: Sequelize,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       isEmail: true
@@ -29,12 +28,6 @@ const User = db.define("user", {
   password: {
     type: Sequelize.STRING,
     allowNull: false,
-    set(input) {
-      bcrypt.hash(input, 12, (err, hash) => {
-        if (err) throw err
-        else return hash
-      })
-    }
   },
   isCurrentHouseMate: {
     type: Sequelize.BOOLEAN,

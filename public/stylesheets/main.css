@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+a {
+    color: white;
+  text-decoration: none;
+}
+body {
+  margin: 0;
+  font-family: 'Nunito', Helvetica, Arial, sans-serif;
+}
+nav#navbar {
+  display: flex;
+  background-color: #474747;
+  justify-content: space-between;
+}
+nav #tabs {
+  
+}
+nav #tabs a {
+  padding: 0 10px;
+  border-right: 1px solid #7a7a7a;
+  border-left: 1px solid #7a7a7a;
+}
+nav #tabs a:hover {
+  background-color: #2b2a2a;
+  
+}

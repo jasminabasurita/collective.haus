@@ -1,11 +1,12 @@
-const express = require('express')
+const express = require("express")
 const app = express()
-const path = require('path')
-const volleyball = require('volleyball')
-const session = require('session')
-const passport = require('passport')
-const authRouter = require('./auth')
-const apiRouter = require('./api')
+const path = require("path")
+const volleyball = require("volleyball")
+const session = require("express-session")
+const passport = require("passport")
+const authRouter = require("./auth")
+const apiRouter = require("./api")
+const { User } = require("./db")
 
 app.use(volleyball)
 app.use(express.json())
@@ -19,14 +20,24 @@ app.use(
 )
 
 app.use(passport.initialize())
+passport.serializeUser(function(user, done) {
+  done(null, user.id)
+})
+passport.deserializeUser(function(id, done) {
+  User.findById(id)
+    .then(function(user) {
+      done(null, user)
+    })
+    .catch(done)
+})
 app.use(passport.session())
 
-app.use('/api', apiRouter)
-app.use('/auth', authRouter)
-app.use(express.static(path.join(__dirname, '../public')))
+app.use("/api", apiRouter)
+app.use("/auth", authRouter)
+app.use(express.static(path.join(__dirname, "../public")))
 
-app.get('*', (req, res, next) => {
-  res.send('/index.html')
+app.get("*", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "..", "public/index.html"))
 })
 
 app.use((err, req, res, next) => {

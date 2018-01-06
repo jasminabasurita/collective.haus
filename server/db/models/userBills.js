@@ -1,13 +1,15 @@
 const Sequelize = require("sequelize")
 const db = require("../_db")
 
-const UserBills = db.define("user-bills" , {
+const UserBills = db.define("user-bills", {
   percentageOwed: {
     type: Sequelize.FLOAT,
     defaultValue: 0
   },
   amountPaid: {
-    type:Sequelize.FLOAT,
+    type: Sequelize.FLOAT,
     defaultValue: 0
   }
 })
+
+module.exports = UserBills
