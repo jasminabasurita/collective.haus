@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { postComment } from "../redux"
+import { emojify } from "react-emojione"
 
 function Comments(props) {
   return (
@@ -15,9 +16,9 @@ function Comments(props) {
       {props.comments.map(comment => (
         <div key={comment.id} className="comment">
           <h5 className="user">
-            {props.users.find(user => user.id === comment.userId).name}
+            {!!props.users.length && props.users.find(user => user.id === comment.userId).name}
           </h5>
-          <p className="text">{comment.text}</p>
+          <p className="text">{emojify(comment.text)}</p>
         </div>
       ))}
     </div>
