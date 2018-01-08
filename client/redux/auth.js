@@ -7,16 +7,22 @@ const SET_CURRENT_USER = "SET_CURRENT_USER"
 const setCurrentUser = user => ({ type: SET_CURRENT_USER, user })
 
 //THUNK CREATORS
-export function postLogin(userLogin) {
-  return function thunk(dispatch) {
-    axios
-      .post("/auth/login", userLogin)
-      .then(res => res.data)
-      .then(user => {
-        dispatch(setCurrentUser(user))
-      })
-      .catch(err => console.error(err))
-  }
+export const postLogin = userLogin => dispatch => {
+  axios
+    .post("/auth/login", userLogin)
+    .then(res => res.data)
+    .then(user => {
+      dispatch(setCurrentUser(user))
+    })
+    .catch(err => console.error(err))
+}
+
+export const fetchCurrentUser = () => dispatch => {
+  axios
+    .get("/auth")
+    .then(res => res.data)
+    .then(user => dispatch(setCurrentUser(user)))
+    .catch(err => console.error(err))
 }
 
 export const postSignup = (newUser, history) => dispatch => {

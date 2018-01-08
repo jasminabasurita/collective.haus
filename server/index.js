@@ -32,6 +32,13 @@ passport.deserializeUser(function(id, done) {
 })
 app.use(passport.session())
 
+app.use((req, res, next) => {
+  if (!req.session.counter) req.session.counter = 0
+  console.log("COUNTER: ", ++req.session.counter)
+  console.log("CURRENT USER ID: ", !!req.user && req.user.id)
+  next()
+})
+
 app.use("/api", apiRouter)
 app.use("/auth", authRouter)
 app.use(express.static(path.join(__dirname, "../public")))

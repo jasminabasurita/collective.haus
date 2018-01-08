@@ -26278,8 +26278,7 @@ exports['default'] = thunk;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.postLogout = exports.postSignup = undefined;
-exports.postLogin = postLogin;
+exports.postLogout = exports.postSignup = exports.fetchCurrentUser = exports.postLogin = undefined;
 exports.default = reducer;
 
 var _axios = __webpack_require__(29);
@@ -26297,8 +26296,8 @@ var setCurrentUser = function setCurrentUser(user) {
 };
 
 //THUNK CREATORS
-function postLogin(userLogin) {
-  return function thunk(dispatch) {
+var postLogin = exports.postLogin = function postLogin(userLogin) {
+  return function (dispatch) {
     _axios2.default.post("/auth/login", userLogin).then(function (res) {
       return res.data;
     }).then(function (user) {
@@ -26307,7 +26306,19 @@ function postLogin(userLogin) {
       return console.error(err);
     });
   };
-}
+};
+
+var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
+  return function (dispatch) {
+    _axios2.default.get("/auth").then(function (res) {
+      return res.data;
+    }).then(function (user) {
+      return dispatch(setCurrentUser(user));
+    }).catch(function (err) {
+      return console.error(err);
+    });
+  };
+};
 
 var postSignup = exports.postSignup = function postSignup(newUser, history) {
   return function (dispatch) {
@@ -27378,6 +27389,7 @@ var Root = function (_Component) {
   _createClass(Root, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      _store2.default.dispatch((0, _redux.fetchCurrentUser)());
       _store2.default.dispatch((0, _redux.fetchComments)());
       _store2.default.dispatch((0, _redux.fetchUsers)());
     }
@@ -27780,9 +27792,12 @@ function Comments(props) {
     { id: "body" },
     _react2.default.createElement(
       "form",
-      { className: "comment-input", onSubmit: function onSubmit(event) {
+      {
+        className: "comment-input",
+        onSubmit: function onSubmit(event) {
           return props.handlePost(event, props.currentUser);
-        } },
+        }
+      },
       _react2.default.createElement("textarea", { name: "text" }),
       _react2.default.createElement(
         "button",
@@ -27815,17 +27830,24 @@ var mapState = function mapState(_ref) {
   var comments = _ref.comments,
       currentUser = _ref.currentUser,
       users = _ref.users;
-  return { comments: comments, currentUser: currentUser, users: users };
+  return {
+    comments: comments,
+    currentUser: currentUser,
+    users: users
+  };
 };
 var mapDispatch = function mapDispatch(dispatch, ownProps) {
   return {
     handlePost: function handlePost(event, currentUser) {
       event.preventDefault();
-      var comment = {
-        text: event.target.text.value,
-        userId: currentUser.id
-      };
-      dispatch((0, _redux.postComment)(comment));
+      if (event.target.text.value !== "") {
+        var comment = {
+          text: event.target.text.value,
+          userId: currentUser.id
+        };
+        event.target.text.value = "";
+        dispatch((0, _redux.postComment)(comment));
+      }
     }
   };
 };

@@ -40,6 +40,19 @@ body {
   border: 0;
   resize: none;
 }
+.comment-input button {
+  color: white;
+  background: blue;
+  border: none;
+  width: 4rem;
+  height: 1.5rem;
+}
+.comment-input button:hover {
+  background: blueviolet;
+}
+.comment-input button:active {
+  background: black;
+}
 nav#navbar {
   display: flex;
   background-color: #474747;

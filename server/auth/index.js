@@ -2,6 +2,10 @@ const router = require("express").Router()
 const bcrypt = require("bcrypt")
 const { User } = require("../db")
 
+router.get("/", (req, res, next) => {
+  res.send(req.user)
+})
+
 router.post("/login", (req, res, next) => {
   const { email, password } = req.body
   let user = {}

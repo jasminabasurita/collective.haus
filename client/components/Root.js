@@ -7,13 +7,14 @@ import UserBillz from "./UserBillz"
 import SignUp from "./SignUp"
 import comment from "./Comments"
 import store from "../store"
-import { fetchComments, fetchUsers } from "../redux"
+import { fetchCurrentUser, fetchComments, fetchUsers } from "../redux"
 
 class Root extends Component {
   constructor(props) {
     super(props)
   }
   componentDidMount() {
+    store.dispatch(fetchCurrentUser())
     store.dispatch(fetchComments())
     store.dispatch(fetchUsers())
   }
