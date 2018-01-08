@@ -31,7 +31,6 @@ export const postSignup = (newUser, history) => dispatch => {
 }
 
 export const postLogout = () => dispatch => {
-  console.log('hell')
   axios
     .delete("/auth/logout")
     .then(() => dispatch(setCurrentUser({})))

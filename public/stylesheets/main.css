@@ -8,6 +8,37 @@ a {
 body {
   margin: 0;
   font-family: 'Nunito', Helvetica, Arial, sans-serif;
+  background: #d0cdcd;
+}
+#body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.comment {
+  width: 80vw;
+  margin: 4px 0;
+  padding: 0.5em;
+  background: white;
+}
+.comment h5 {
+  margin: 0;
+}
+.comment-input {
+  width: 80vw;
+  margin: 4px 0;
+  padding: 0.5em;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+}
+.comment-input textarea {
+  width: 100%;
+  height: 4rem;
+  /*! border: 1px solid grey; */
+  border: 0;
+  resize: none;
 }
 nav#navbar {
   display: flex;
