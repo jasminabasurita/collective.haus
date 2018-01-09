@@ -1,9 +1,12 @@
 const app = require("./server")
 const PORT = process.env.PORT || 3000
 const { db } = require("./server/db")
+const session = require("express-session")
+const SequelizeStore = require('connect-session-sequelize')(session.Store)
+const sessionStore = new SequelizeStore({db})
 
-db
-  .sync({ })
+sessionStore.sync()
+  .then(() => db.sync({ }))
   .then(() => {
     console.log("db up and running")
     app.listen(PORT, err => {
