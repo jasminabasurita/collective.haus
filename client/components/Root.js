@@ -9,7 +9,7 @@ import { fetchCurrentUser } from "../redux"
 function Root(props) {
   const isLoggedIn = !!props.currentUser.id
   return isLoggedIn ? (
-    <LoggedInRoot />
+    <Route path="/" component={LoggedInRoot} />
   ) : (
     <Switch>
       <Route exact path="/signup" component={SignUp} />

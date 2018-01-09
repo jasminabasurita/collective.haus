@@ -4,7 +4,7 @@ import axios from "axios"
 const SET_CURRENT_USER = "SET_CURRENT_USER"
 
 //ACTION CREATORS
-const setCurrentUser = user => ({ type: SET_CURRENT_USER, user })
+export const setCurrentUser = user => ({ type: SET_CURRENT_USER, user })
 
 //THUNK CREATORS
 export const postLogin = userLogin => dispatch => {
@@ -14,14 +14,6 @@ export const postLogin = userLogin => dispatch => {
     .then(user => {
       dispatch(setCurrentUser(user))
     })
-    .catch(err => console.error(err))
-}
-
-export const fetchCurrentUser = () => dispatch => {
-  axios
-    .get("/auth")
-    .then(res => res.data)
-    .then(user => dispatch(setCurrentUser(user)))
     .catch(err => console.error(err))
 }
 

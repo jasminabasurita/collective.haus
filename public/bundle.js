@@ -4195,23 +4195,32 @@ var _store2 = _interopRequireDefault(_store);
 
 var _redux = __webpack_require__(8);
 
+var _axios = __webpack_require__(29);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 var _Root = __webpack_require__(145);
 
 var _Root2 = _interopRequireDefault(_Root);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_store2.default.dispatch((0, _redux.fetchCurrentUser)());
-
-_reactDom2.default.render(_react2.default.createElement(
-  _reactRedux.Provider,
-  { store: _store2.default },
-  _react2.default.createElement(
-    _reactRouterDom.BrowserRouter,
-    null,
-    _react2.default.createElement(_reactRouterDom.Route, { path: "/", component: _Root2.default })
-  )
-), document.getElementById("root"));
+_axios2.default.get("/auth").then(function (res) {
+  return res.data;
+}).then(function (user) {
+  _store2.default.dispatch((0, _redux.setCurrentUser)(user));
+  _reactDom2.default.render(_react2.default.createElement(
+    _reactRedux.Provider,
+    { store: _store2.default },
+    _react2.default.createElement(
+      _reactRouterDom.BrowserRouter,
+      null,
+      _react2.default.createElement(_reactRouterDom.Route, { path: "/", component: _Root2.default })
+    )
+  ), document.getElementById("root"));
+}).catch(function (err) {
+  return console.error(err);
+});
 
 /***/ }),
 /* 60 */
@@ -26282,7 +26291,7 @@ exports['default'] = thunk;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.postLogout = exports.postSignup = exports.fetchCurrentUser = exports.postLogin = undefined;
+exports.postLogout = exports.postSignup = exports.postLogin = exports.setCurrentUser = undefined;
 exports.default = reducer;
 
 var _axios = __webpack_require__(29);
@@ -26295,7 +26304,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var SET_CURRENT_USER = "SET_CURRENT_USER";
 
 //ACTION CREATORS
-var setCurrentUser = function setCurrentUser(user) {
+var setCurrentUser = exports.setCurrentUser = function setCurrentUser(user) {
   return { type: SET_CURRENT_USER, user: user };
 };
 
@@ -26306,18 +26315,6 @@ var postLogin = exports.postLogin = function postLogin(userLogin) {
       return res.data;
     }).then(function (user) {
       dispatch(setCurrentUser(user));
-    }).catch(function (err) {
-      return console.error(err);
-    });
-  };
-};
-
-var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
-  return function (dispatch) {
-    _axios2.default.get("/auth").then(function (res) {
-      return res.data;
-    }).then(function (user) {
-      return dispatch(setCurrentUser(user));
     }).catch(function (err) {
       return console.error(err);
     });
@@ -27363,7 +27360,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function Root(props) {
   var isLoggedIn = !!props.currentUser.id;
-  return isLoggedIn ? _react2.default.createElement(_LoggedInRoot2.default, null) : _react2.default.createElement(
+  return isLoggedIn ? _react2.default.createElement(_reactRouterDom.Route, { path: "/", component: _LoggedInRoot2.default }) : _react2.default.createElement(
     _reactRouterDom.Switch,
     null,
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/signup", component: _SignUp2.default }),
@@ -27755,7 +27752,7 @@ function Comments(props) {
           return props.handlePost(event, props.currentUser);
         }
       },
-      _react2.default.createElement("textarea", { name: "text" }),
+      _react2.default.createElement("textarea", { name: "text", placeholder: "Whatchu gotta say..." }),
       _react2.default.createElement(
         "button",
         { type: "submit" },

@@ -10,7 +10,7 @@ function Comments(props) {
         className="comment-input"
         onSubmit={event => props.handlePost(event, props.currentUser)}
       >
-        <textarea name="text" />
+        <textarea name="text" placeholder="Whatchu gotta say..." />
         <button type="submit">Post</button>
       </form>
       {props.comments.map(comment => (
