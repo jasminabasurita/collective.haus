@@ -1,56 +1,20 @@
-const express = require("express")
-const app = express()
-const path = require("path")
-const volleyball = require("volleyball")
-const session = require("express-session")
-const passport = require("passport")
-const authRouter = require("./auth")
-const apiRouter = require("./api")
-const { User } = require("./db")
-// const socketio = require('socket.io')
+const app = require("./app")
+const PORT = process.env.PORT || 3000
+const { db } = require("./db")
 
-app.use(volleyball)
-app.use(express.json())
-app.use(express.urlencoded())
-app.use(
-  session({
-    secret: "Ññññññooooooo",
-    resave: false,
-    saveUninitialized: true
-  })
-)
+db
+  .sync({})
+  .then(() => {
+    console.log("db up and running")
+    app.listen(PORT, err => {
+      if (err) throw err
+      console.log(`
 
-app.use(passport.initialize())
-passport.serializeUser(function(user, done) {
-  done(null, user.id)
-})
-passport.deserializeUser(function(id, done) {
-  User.findById(id)
-    .then(function(user) {
-      done(null, user)
+      =================================================
+      Collective Haus listening at http://localhost:${PORT}
+      =================================================
+
+      `)
     })
-    .catch(done)
-})
-app.use(passport.session())
-
-app.use((req, res, next) => {
-  if (!req.session.counter) req.session.counter = 0
-  console.log("COUNTER: ", ++req.session.counter)
-  console.log("CURRENT USER ID: ", !!req.user && req.user.id)
-  next()
-})
-
-app.use("/api", apiRouter)
-app.use("/auth", authRouter)
-app.use(express.static(path.join(__dirname, "../public")))
-
-app.get("*", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "..", "public/index.html"))
-})
-
-app.use((err, req, res, next) => {
-  console.error(err)
-  res.status(err.status || 500).send(err.message || "Internal Error")
-})
-
-module.exports = app
+  })
+  .catch(console.error)
