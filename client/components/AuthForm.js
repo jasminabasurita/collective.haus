@@ -1,37 +1,52 @@
 import React from "react"
-import { auth } from "../redux"
+import { auth, authError } from "../store"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 
 const AuthForm = props => (
   <div id="auth-hero">
-    <form onSubmit={props.handleSubmit}>
-      <div>
-        <label>First Name: </label>
-        <input name="firstName" type="text" required />
-      </div>
-      <div>
-        <label>Last Name: </label>
-        <input name="lastName" type="text" required />
-      </div>
+    <form onSubmit={props.handleSubmit} name={props.name}>
+      {props.name === "signup" && (
+        <div>
+          <label>First Name: </label>
+          <br />
+          <input name="firstName" type="text" required />
+        </div>
+      )}
+      {props.name === "signup" && (
+        <div>
+          <label>Last Name: </label>
+          <br />
+          <input name="lastName" type="text" required />
+        </div>
+      )}
       <div>
         <label>Email: </label>
+        <br />
         <input name="email" type="email" required />
       </div>
       <div>
         <label>Password: </label>
+        <br />
         <input name="password" type="password" required />
       </div>
-      <div>
-        <label>Re-Enter Password: </label>
-        <input name="password2" type="password" required />
-      </div>
+      {props.name === "signup" && (
+        <div>
+          <label>Re-Enter Password: </label>
+          <br />
+          <input name="password2" type="password" required />
+        </div>
+      )}
       <div id="auth-submit">
-        <button type="submit">props.displayName</button>
-        <Link to={`/${props.name}`}>
-          or {props.name === "Login" ? "Sign Up" : "Login"}
-        </Link>
+        <button type="submit">{props.displayName}</button>
+        or{" "}
+        {props.name === "login" ? (
+          <Link to="/signup">Sign Up</Link>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
       </div>
+      {props.error && <div id="auth-error">{props.error}</div>}
     </form>
   </div>
 )
@@ -50,15 +65,24 @@ const mapLogin = state => ({
 const mapDispatch = dispatch => ({
   handleSubmit(evt) {
     evt.preventDefault()
-    const formName = evt.target.name,
-      email = evt.target.email.value,
-      password = evt.target.password.value,
-      password2 = evt.target.password2.value,
-      firstName = evt.target.firstName.value,
-      lastName = evt.target.lastName.value
+    let formInput = {
+      method: evt.target.name,
+      email: evt.target.email.value,
+      password: evt.target.password.value
+    }
+    if (formInput.method === "signup") {
+      formInput.password2 = evt.target.password2.value
+      formInput.firstName = evt.target.firstName.value
+      formInput.lastName = evt.target.lastName.value
+    }
 
-    if (formName === "login" || password === password2) {
-      dispatch(auth(email, password, firstName, lastName, formName))
+    if (
+      formInput.method === "login" ||
+      formInput.password === formInput.password2
+    ) {
+      dispatch(auth(formInput))
+    } else {
+      dispatch(authError("Passwords Do Not Match"))
     }
   }
 })

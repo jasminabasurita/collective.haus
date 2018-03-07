@@ -1,15 +1,10 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Route, Switch, Redirect } from "react-router-dom"
-import { fetchComments, fetchUsers } from "../redux"
-import Navbar from "./Navbar"
-import UserBillz from "./UserBillz"
-import Comments from "./Comments"
+import { fetchComments, fetchUsers } from "../store"
+import { Navbar, UserBillz, Chat } from "../components"
 
 class LoggedInRoot extends Component {
-  constructor(props) {
-    super(props)
-  }
   componentDidMount() {
     this.props.initialSetup()
   }
@@ -19,7 +14,7 @@ class LoggedInRoot extends Component {
         <Navbar />
         <Switch>
           <Route exact path="/" component={UserBillz} />
-          <Route exact path="/comment" component={Comments} />
+          <Route exact path="/chat" component={Chat} />
           <Redirect to="/" />
         </Switch>
       </div>

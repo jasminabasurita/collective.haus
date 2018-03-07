@@ -3,14 +3,14 @@ const bcrypt = require("bcrypt")
 const { User } = require("../db")
 
 router.get("/", (req, res, next) => {
-  res.send(req.user)
+  res.json(req.user)
 })
 
 router.post("/login", (req, res, next) => {
   const { email, password } = req.body
   let user = {}
   const reject = () => {
-    let err = new Error("Email/User Doesn't Match")
+    let err = new Error("Email/Password Do Not Match")
     err.status = 401
     throw err
   }

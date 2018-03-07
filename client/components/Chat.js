@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { postComment } from "../redux"
+import { postComment } from "../store"
 import { emojify } from "react-emojione"
 
 function Comments(props) {
