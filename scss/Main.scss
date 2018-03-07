@@ -135,58 +135,43 @@ a.current:focus > button {
   justify-content: space-around;
   align-items: center;
   height: 100vh;
+
+  > form {
+    background: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    width: 18em;
+    min-height: 22em;
+    padding: 1em;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 0, 0, 0.4);
+    > div {
+      padding: 1em 0;
+    }
+    input {
+      border: none;
+      border-bottom: 2px rgba(0, 0, 0, 0.3) solid;
+      box-shadow: none;
+      background-color: antiquewhite;
+      transition: all 0.5s;
+      &:focus {
+        border-bottom: 2.5px rgba(0, 0, 255, 0.6) solid;
+        transform: scale(1.03);
+      }
+    }
+  }
+  #auth-submit > button {
+    margin-right: 1em;
+  }
+
+  #auth-error {
+    background: rgba(255, 0, 0, 0.6);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6), 0 0 4px rgba(0, 0, 0, 0.6);
+    padding: 1em !important;
+  }
 }
 
-#auth-hero > form {
-  background: antiquewhite;
-  display: flex;
-  flex-direction: column;
-  width: 18em;
-  min-height: 22em;
-  padding: 1em;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 0, 0, 0.4);
-}
-
-#auth-hero > form > div {
-  padding: 1em 0;
-}
-
-#auth-hero > form input {
-  border: none;
-  border-bottom: 2px rgba(0, 0, 0, 0.3) solid;
-  box-shadow: none;
-  background-color: antiquewhite;
-  transition: all 0.5s;
-}
-#auth-hero > form input:focus {
-  border-bottom: 2.5px rgba(0, 0, 255, 0.6) solid;
-  transform: scale(1.03);
-}
-
-#auth-submit > button {
-  margin-right: 1em;
-}
-
-#auth-error {
-  background: rgba(255, 0, 0, 0.6);
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.6), 0 0 4px rgba(0, 0, 0, 0.6);
-  padding: 1em !important;
-}
-
-
-
-// WEBPACK FOOTER //
-// ./scss/scss/Main.scss
-
-
-// WEBPACK FOOTER //
-// ./scss/scss/Main.scss
-
-
-// WEBPACK FOOTER //
-// ./scss/scss/Main.scss
 
 
 // WEBPACK FOOTER //
