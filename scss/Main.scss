@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+body,
+button,
+input,
+textarea {
+  font-family: "Mukta Mahee", Helvetica, Arial, sans-serif;
+}
+
 button {
   transition: all 0.2s;
   border: none;
@@ -34,7 +41,6 @@ button {
 body {
   margin: 0em;
   padding-top: 3.5em;
-  font-family: "Mukta Mahee", Helvetica, Arial, sans-serif;
   background: #d0cdcd;
 }
 #body {
@@ -88,48 +94,47 @@ nav {
   a {
     outline: 0;
   }
+  button {
+    border: none;
+    background: rgba(0, 0, 0, 0.3);
+    color: #ddb160;
+    height: 3.5em;
+    width: auto;
+    transition: all 0.3s;
+    box-shadow: none;
+    font-size: 0.85em;
+    > h3 {
+      margin: 0;
+    }
+    &:active {
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: inset -1px 0px 5px rgba(0, 0, 0, 0.5),
+        inset 1px 0px 5px rgba(0, 0, 0, 0.5);
+      transform: scale(1);
+    }
+  }
+  button:hover,
+  button:focus,
+  a:focus > button {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: -1px 0px 1px rgba(0, 0, 0, 0.2), 1px 0px 1px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+  }
+  a.current {
+    > button,
+    > button:hover,
+    > button:focus,
+    > button:active,
+    &:focus > button {
+      background: rgba(0, 0, 0, 0.4);
+      box-shadow: inset -1px 0px 3px rgba(0, 0, 0, 0.3),
+        inset 1px 0px 3px rgba(0, 0, 0, 0.3);
+      transform: scale(1);
+    }
+  }
 }
 
-.navButton > h3 {
-  margin: 0;
-}
-
-.navButton {
-  border: none;
-  background: rgba(0, 0, 0, 0.3);
-  color: #ddb160;
-  height: 3.5em;
-  width: auto;
-  transition: all 0.3s;
-  box-shadow: none;
-  font-size: 0.85em;
-}
-
-.navButton:hover,
-.navButton:focus,
-nav a:focus > button {
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: -1px 0px 1px rgba(0, 0, 0, 0.2), 1px 0px 1px rgba(0, 0, 0, 0.2);
-  transform: scale(1.02);
-}
-.navButton:active {
-  background: rgba(0, 0, 0, 0.5);
-  box-shadow: inset -1px 0px 5px rgba(0, 0, 0, 0.5),
-    inset 1px 0px 5px rgba(0, 0, 0, 0.5);
-  transform: scale(1);
-}
-a.current > button,
-a.current > button:hover,
-a.current > button:focus,
-a.current > button:active,
-a.current:focus > button {
-  background: rgba(0, 0, 0, 0.4);
-  box-shadow: inset -1px 0px 3px rgba(0, 0, 0, 0.3),
-    inset 1px 0px 3px rgba(0, 0, 0, 0.3);
-  transform: scale(1);
-}
-
-#auth-hero {
+#auth {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -161,17 +166,32 @@ a.current:focus > button {
       }
     }
   }
-  #auth-submit > button {
+  &-submit > button {
     margin-right: 1em;
   }
 
-  #auth-error {
+  &-error {
     background: rgba(255, 0, 0, 0.6);
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.6), 0 0 4px rgba(0, 0, 0, 0.6);
     padding: 1em !important;
   }
 }
 
+// WEBPACK FOOTER //
+// ./scss/scss/Main.scss
+
+
+
+// WEBPACK FOOTER //
+// ./scss/scss/Main.scss
+
+
+// WEBPACK FOOTER //
+// ./scss/scss/Main.scss
+
+
+// WEBPACK FOOTER //
+// ./scss/scss/Main.scss
 
 
 // WEBPACK FOOTER //

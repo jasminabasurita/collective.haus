@@ -1,2 +1,141 @@
-@import url(https://fonts.googleapis.com/css?family=Mukta+Mahee);*{box-sizing:border-box}button{transition:all .2s;border:none;height:2.5em;width:6em;font-size:1.1em;height:2em;width:4.6em;background:#faebd7;box-shadow:0 0 3px rgba(0,0,0,.4),0 0 6px rgba(0,0,0,.4)}button:focus,button:hover{box-shadow:0 0 6px rgba(0,0,0,.4),0 0 9px rgba(0,0,0,.4);transform:scale(1.1)}button:active{transform:scale(.99);box-shadow:0 0 2px rgba(0,0,0,.4),0 0 5px rgba(0,0,0,.4)}button::-moz-focus-inner{border:0}body{margin:0;padding-top:3.5em;font-family:Mukta Mahee,Helvetica,Arial,sans-serif;background:#d0cdcd}#body{display:flex;flex-direction:column;align-items:center}.comment{width:80vw;margin:4px 0;padding:.5em;background:#faebd7}.comment h5{margin:0}.comment-input{width:80vw;margin:4px 0;padding:.5em;background:#faebd7;display:flex;flex-direction:column;align-items:right}.comment-input textarea{background:#faebd7;width:100%;min-height:4rem;border:0;resize:vertical;margin-bottom:1em}nav{position:fixed;top:0;right:0;width:100%;z-index:10;height:3em;display:flex;background:rgba(35,26,16,.8);justify-content:space-between;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,.4)}nav a{outline:0}.navButton>h3{margin:0}.navButton{border:none;background:rgba(0,0,0,.3);color:#ddb160;height:3.5em;width:auto;transition:all .3s;box-shadow:none;font-size:.85em}.navButton:focus,.navButton:hover,nav a:focus>button{background:rgba(0,0,0,.2);box-shadow:-1px 0 1px rgba(0,0,0,.2),1px 0 1px rgba(0,0,0,.2);transform:scale(1.02)}.navButton:active{background:rgba(0,0,0,.5);box-shadow:inset -1px 0 5px rgba(0,0,0,.5),inset 1px 0 5px rgba(0,0,0,.5);transform:scale(1)}a.current:focus>button,a.current>button,a.current>button:active,a.current>button:focus,a.current>button:hover{background:rgba(0,0,0,.4);box-shadow:inset -1px 0 3px rgba(0,0,0,.3),inset 1px 0 3px rgba(0,0,0,.3);transform:scale(1)}#auth-hero{justify-content:space-around;height:100vh}#auth-hero,#auth-hero>form{display:flex;flex-direction:column;align-items:center}#auth-hero>form{background:#faebd7;width:18em;min-height:22em;padding:1em;justify-content:center;box-shadow:0 0 4px rgba(0,0,0,.4),0 0 8px rgba(0,0,0,.4)}#auth-hero>form>div{padding:1em 0}#auth-hero>form input{border:none;border-bottom:2px solid rgba(0,0,0,.3);box-shadow:none;background-color:#faebd7;transition:all .5s}#auth-hero>form input:focus{border-bottom:2.5px solid rgba(0,0,255,.6);transform:scale(1.03)}#auth-hero #auth-submit>button{margin-right:1em}#auth-hero #auth-error{background:rgba(255,0,0,.6);box-shadow:0 0 2px rgba(0,0,0,.6),0 0 4px rgba(0,0,0,.6);padding:1em!important}
+@import url(https://fonts.googleapis.com/css?family=Mukta+Mahee);* {
+  box-sizing: border-box; }
+
+body,
+button,
+input,
+textarea {
+  font-family: "Mukta Mahee", Helvetica, Arial, sans-serif; }
+
+button {
+  transition: all 0.2s;
+  border: none;
+  height: 2.5em;
+  width: 6em;
+  font-size: 1.1em;
+  height: 2em;
+  width: 4.6em;
+  background: antiquewhite;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4), 0 0 6px rgba(0, 0, 0, 0.4); }
+  button:hover, button:focus {
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.4), 0 0 9px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1); }
+  button:active {
+    transform: scale(0.99);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4), 0 0 5px rgba(0, 0, 0, 0.4); }
+  button::-moz-focus-inner {
+    border: 0; }
+
+body {
+  margin: 0em;
+  padding-top: 3.5em;
+  background: #d0cdcd; }
+
+#body {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.comment {
+  width: 80vw;
+  margin: 4px 0;
+  padding: 0.5em;
+  background: antiquewhite; }
+  .comment h5 {
+    margin: 0; }
+
+.comment-input {
+  width: 80vw;
+  margin: 4px 0;
+  padding: 0.5em;
+  background: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  align-items: right; }
+  .comment-input textarea {
+    background: antiquewhite;
+    width: 100%;
+    min-height: 4rem;
+    border: 0;
+    resize: vertical;
+    margin-bottom: 1em; }
+
+nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10;
+  height: 3em;
+  display: flex;
+  background: rgba(35, 26, 16, 0.8);
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); }
+  nav a {
+    outline: 0; }
+  nav button {
+    border: none;
+    background: rgba(0, 0, 0, 0.3);
+    color: #ddb160;
+    height: 3.5em;
+    width: auto;
+    transition: all 0.3s;
+    box-shadow: none;
+    font-size: 0.85em; }
+    nav button > h3 {
+      margin: 0; }
+    nav button:active {
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: inset -1px 0px 5px rgba(0, 0, 0, 0.5), inset 1px 0px 5px rgba(0, 0, 0, 0.5);
+      transform: scale(1); }
+  nav button:hover,
+  nav button:focus,
+  nav a:focus > button {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: -1px 0px 1px rgba(0, 0, 0, 0.2), 1px 0px 1px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02); }
+  nav a.current > button,
+  nav a.current > button:hover,
+  nav a.current > button:focus,
+  nav a.current > button:active,
+  nav a.current:focus > button {
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: inset -1px 0px 3px rgba(0, 0, 0, 0.3), inset 1px 0px 3px rgba(0, 0, 0, 0.3);
+    transform: scale(1); }
+
+#auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh; }
+  #auth > form {
+    background: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    width: 18em;
+    min-height: 22em;
+    padding: 1em;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 0, 0, 0.4); }
+    #auth > form > div {
+      padding: 1em 0; }
+    #auth > form input {
+      border: none;
+      border-bottom: 2px rgba(0, 0, 0, 0.3) solid;
+      box-shadow: none;
+      background-color: antiquewhite;
+      transition: all 0.5s; }
+      #auth > form input:focus {
+        border-bottom: 2.5px rgba(0, 0, 255, 0.6) solid;
+        transform: scale(1.03); }
+  #auth-submit > button {
+    margin-right: 1em; }
+  #auth-error {
+    background: rgba(255, 0, 0, 0.6);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6), 0 0 4px rgba(0, 0, 0, 0.6);
+    padding: 1em !important; }
+
 /*# sourceMappingURL=main.bundle.css.map*/

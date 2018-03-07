@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 
 const AuthForm = props => (
-  <div id="auth-hero">
+  <div id="auth">
     <form onSubmit={props.handleSubmit} name={props.name}>
       {props.name === "signup" && (
         <div>
