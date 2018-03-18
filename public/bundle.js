@@ -30865,13 +30865,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function Comments(props) {
   return _react2.default.createElement(
     "div",
-    { id: "body" },
+    { id: "chat" },
     _react2.default.createElement(
       "form",
       {
-        className: "comment-input",
+        className: "chat-input",
         onSubmit: function onSubmit(event) {
-          return props.handlePost(event, props.currentUser);
+          return props.handlePost(event, props.user);
         }
       },
       _react2.default.createElement("textarea", { name: "text", placeholder: "Whatchu gotta say..." }),
@@ -30884,7 +30884,7 @@ function Comments(props) {
     props.comments.map(function (comment) {
       return _react2.default.createElement(
         "div",
-        { key: comment.id, className: "comment" },
+        { key: comment.id, className: "chat-message" },
         _react2.default.createElement(
           "h5",
           { className: "user" },
@@ -30904,22 +30904,22 @@ function Comments(props) {
 
 var mapState = function mapState(_ref) {
   var comments = _ref.comments,
-      currentUser = _ref.currentUser,
+      user = _ref.user,
       users = _ref.users;
   return {
     comments: comments,
-    currentUser: currentUser,
+    user: user,
     users: users
   };
 };
 var mapDispatch = function mapDispatch(dispatch, ownProps) {
   return {
-    handlePost: function handlePost(event, currentUser) {
+    handlePost: function handlePost(event, user) {
       event.preventDefault();
       if (event.target.text.value !== "") {
         var comment = {
           text: event.target.text.value,
-          userId: currentUser.id
+          userId: user.id
         };
         event.target.text.value = "";
         dispatch((0, _store.postComment)(comment));
@@ -34148,21 +34148,10 @@ var AuthForm = function AuthForm(props) {
         _react2.default.createElement(
           "label",
           null,
-          "First Name: "
+          "Username: "
         ),
         _react2.default.createElement("br", null),
-        _react2.default.createElement("input", { name: "firstName", type: "text", required: true })
-      ),
-      props.name === "signup" && _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement(
-          "label",
-          null,
-          "Last Name: "
-        ),
-        _react2.default.createElement("br", null),
-        _react2.default.createElement("input", { name: "lastName", type: "text", required: true })
+        _react2.default.createElement("input", { name: "username", type: "text", required: true })
       ),
       _react2.default.createElement(
         "div",
@@ -34252,8 +34241,7 @@ var mapDispatch = function mapDispatch(dispatch) {
       };
       if (formInput.method === "signup") {
         formInput.password2 = evt.target.password2.value;
-        formInput.firstName = evt.target.firstName.value;
-        formInput.lastName = evt.target.lastName.value;
+        formInput.username = evt.target.username.value;
       }
 
       if (formInput.method === "login" || formInput.password === formInput.password2) {

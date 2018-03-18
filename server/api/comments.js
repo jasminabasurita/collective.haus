@@ -1,22 +1,22 @@
 const router = require("express").Router()
-const { User, Comment, db } = require("../db")
+const { User, Message, db } = require("../db")
 
 router.get("/", (req, res, next) => {
-  Comment.findAll({ order: [["createdAt", "DESC"]], limit: 10 })
-    .then(comments => res.json(comments))
+  Message.findAll({ order: [["createdAt", "DESC"]], limit: 10 })
+    .then(messages => res.json(messages))
     .catch(next)
 })
 
 router.post("/", (req, res, next) => {
-  Comment.create(req.body)
-    .then(comment => res.json(comment))
+  Message.create(req.body)
+    .then(message => res.json(message))
     .catch(next)
 })
 
 router.put("/:id", (req, res, next) => {
-  Comment.findById(req.params.id)
-    .then(comment => comment.update(req.body))
-    .then(comment => res.json(comment))
+  Message.findById(req.params.id)
+    .then(message => message.update(req.body))
+    .then(message => res.json(message))
     .catch(next)
 })
 

@@ -8,16 +8,9 @@ const AuthForm = props => (
     <form onSubmit={props.handleSubmit} name={props.name}>
       {props.name === "signup" && (
         <div>
-          <label>First Name: </label>
+          <label>Username: </label>
           <br />
-          <input name="firstName" type="text" required />
-        </div>
-      )}
-      {props.name === "signup" && (
-        <div>
-          <label>Last Name: </label>
-          <br />
-          <input name="lastName" type="text" required />
+          <input name="username" type="text" required />
         </div>
       )}
       <div>
@@ -72,8 +65,7 @@ const mapDispatch = dispatch => ({
     }
     if (formInput.method === "signup") {
       formInput.password2 = evt.target.password2.value
-      formInput.firstName = evt.target.firstName.value
-      formInput.lastName = evt.target.lastName.value
+      formInput.username = evt.target.username.value
     }
 
     if (

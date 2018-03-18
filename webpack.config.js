@@ -20,10 +20,7 @@ module.exports = {
     extensions: [".js", ".jsx"]
   },
   plugins: isDev
-    ? [
-        new LiveReloadPlugin({ appendScriptTag: true, ignore: /\.scss$/ }),
-        extractSass
-      ]
+    ? [new LiveReloadPlugin({ appendScriptTag: true }), extractSass]
     : [extractSass],
   module: {
     rules: [

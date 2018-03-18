@@ -1,198 +1,25 @@
 @import url("https://fonts.googleapis.com/css?family=Mukta+Mahee");
 
+$shadow: (0 0 4px rgba(0, 0, 0, 0.4)), (0 0 8px rgba(0, 0, 0, 0.4));
+
 * {
   box-sizing: border-box;
 }
 
-body,
-button,
-input,
-textarea {
-  font-family: "Mukta Mahee", Helvetica, Arial, sans-serif;
-}
-
-button {
-  transition: all 0.2s;
-  border: none;
-  height: 2.5em;
-  width: 6em;
-  font-size: 1.1em;
-  height: 2em;
-  width: 4.6em;
-  background: antiquewhite;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4), 0 0 6px rgba(0, 0, 0, 0.4);
-
-  &:hover,
-  &:focus {
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.4), 0 0 9px rgba(0, 0, 0, 0.4);
-    transform: scale(1.1);
-  }
-
-  &:active {
-    transform: scale(0.99);
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4), 0 0 5px rgba(0, 0, 0, 0.4);
-  }
-
-  &::-moz-focus-inner {
-    border: 0;
-  }
-}
-
 body {
-  margin: 0em;
+  margin: 0;
   padding-top: 3.5em;
   background: #d0cdcd;
-}
-#body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.comment {
-  width: 80vw;
-  margin: 4px 0;
-  padding: 0.5em;
-  background: antiquewhite;
 
-  h5 {
-    margin: 0;
-  }
-}
-
-.comment-input {
-  width: 80vw;
-  margin: 4px 0;
-  padding: 0.5em;
-  background: antiquewhite;
-  display: flex;
-  flex-direction: column;
-  align-items: right;
-
+  &,
+  button,
+  input,
   textarea {
-    background: antiquewhite;
-    width: 100%;
-    min-height: 4rem;
-    border: 0;
-    resize: vertical;
-    margin-bottom: 1em;
+    font-family: "Mukta Mahee", Helvetica, Arial, sans-serif;
   }
+
+  @import "modules/default-button";
+  @import "components/Chat";
+  @import "components/Navbar";
+  @import "components/AuthForm";
 }
-
-nav {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  z-index: 10;
-  height: 3em;
-  display: flex;
-  background: rgba(35, 26, 16, 0.8);
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-
-  a {
-    outline: 0;
-  }
-  button {
-    border: none;
-    background: rgba(0, 0, 0, 0.3);
-    color: #ddb160;
-    height: 3.5em;
-    width: auto;
-    transition: all 0.3s;
-    box-shadow: none;
-    font-size: 0.85em;
-    > h3 {
-      margin: 0;
-    }
-    &:active {
-      background: rgba(0, 0, 0, 0.5);
-      box-shadow: inset -1px 0px 5px rgba(0, 0, 0, 0.5),
-        inset 1px 0px 5px rgba(0, 0, 0, 0.5);
-      transform: scale(1);
-    }
-  }
-  button:hover,
-  button:focus,
-  a:focus > button {
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: -1px 0px 1px rgba(0, 0, 0, 0.2), 1px 0px 1px rgba(0, 0, 0, 0.2);
-    transform: scale(1.02);
-  }
-  a.current {
-    > button,
-    > button:hover,
-    > button:focus,
-    > button:active,
-    &:focus > button {
-      background: rgba(0, 0, 0, 0.4);
-      box-shadow: inset -1px 0px 3px rgba(0, 0, 0, 0.3),
-        inset 1px 0px 3px rgba(0, 0, 0, 0.3);
-      transform: scale(1);
-    }
-  }
-}
-
-#auth {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  height: 100vh;
-
-  > form {
-    background: antiquewhite;
-    display: flex;
-    flex-direction: column;
-    width: 18em;
-    min-height: 22em;
-    padding: 1em;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 0, 0, 0.4);
-    > div {
-      padding: 1em 0;
-    }
-    input {
-      border: none;
-      border-bottom: 2px rgba(0, 0, 0, 0.3) solid;
-      box-shadow: none;
-      background-color: antiquewhite;
-      transition: all 0.5s;
-      &:focus {
-        border-bottom: 2.5px rgba(0, 0, 255, 0.6) solid;
-        transform: scale(1.03);
-      }
-    }
-  }
-  &-submit > button {
-    margin-right: 1em;
-  }
-
-  &-error {
-    background: rgba(255, 0, 0, 0.6);
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6), 0 0 4px rgba(0, 0, 0, 0.6);
-    padding: 1em !important;
-  }
-}
-
-// WEBPACK FOOTER //
-// ./scss/scss/Main.scss
-
-
-
-// WEBPACK FOOTER //
-// ./scss/scss/Main.scss
-
-
-// WEBPACK FOOTER //
-// ./scss/scss/Main.scss
-
-
-// WEBPACK FOOTER //
-// ./scss/scss/Main.scss
-
-
-// WEBPACK FOOTER //
-// ./scss/scss/Main.scss

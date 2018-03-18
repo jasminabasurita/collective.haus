@@ -1,19 +1,25 @@
 const db = require("./_db.js")
-const Bill = require("./models/bill")
-const User = require("./models/user")
-const UserBills = require("./models/userBills")
-const Comment = require("./models/comment")
+const House = require("./models/House")
+const User = require("./models/User")
+const BillItem = require("./models/BillItem")
+const BillCategory = require("./models/BillCategory")
+const UserBill = require("./models/UserBill")
+const Message = require("./models/Message")
 
-User.belongsToMany(Bill, { through: "user-bills" })
-Bill.belongsToMany(User, { through: "user-bills" })
+User.belongsToMany(BillItem, { through: "user-bill" })
+BillItem.belongsToMany(User, { through: "user-bill" })
 
-Comment.belongsTo(User)
-User.hasMany(Comment)
+Message.belongsTo(User)
+Message.belongsTo(House)
+User.hasMany(Message)
+House.hasMany(Message)
 
 module.exports = {
   db,
-  Bill,
+  House,
+  BillItem,
+  BillCategory,
   User,
-  UserBills,
-  Comment
+  UserBill,
+  Message
 }

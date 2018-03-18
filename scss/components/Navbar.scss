@@ -1,0 +1,60 @@
+nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10;
+  height: 3em;
+  display: flex;
+  background: rgba(35, 26, 16, 0.8);
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+
+  a {
+    outline: 0;
+  }
+
+  button {
+    border: none;
+    background: rgba(0, 0, 0, 0.3);
+    color: #ddb160;
+    height: 3.5em;
+    width: auto;
+    transition: all 0.3s;
+    box-shadow: none;
+    font-size: 0.85em;
+
+    > h3 {
+      margin: 0;
+    }
+
+    &:active {
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: inset -1px 0 5px rgba(0, 0, 0, 0.5),
+        inset 1px 0 5px rgba(0, 0, 0, 0.5);
+      transform: scale(1);
+    }
+  }
+
+  button:hover,
+  button:focus,
+  a:focus > button {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: -1px 0 1px rgba(0, 0, 0, 0.2), 1px 0 1px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+  }
+
+  a.current {
+    > button,
+    > button:hover,
+    > button:focus,
+    > button:active,
+    &:focus > button {
+      background: rgba(0, 0, 0, 0.4);
+      box-shadow: inset -1px 0 3px rgba(0, 0, 0, 0.3),
+        inset 1px 0 3px rgba(0, 0, 0, 0.3);
+      transform: scale(1);
+    }
+  }
+}

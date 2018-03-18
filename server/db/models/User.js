@@ -2,32 +2,24 @@ const Sequelize = require("sequelize")
 const db = require("../_db.js")
 
 const User = db.define("user", {
-  firstName: {
+  username: {
     type: Sequelize.STRING,
     allowNull: false
-  },
-  lastName: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  name: {
-    type: Sequelize.VIRTUAL,
-    get() {
-      return (
-        this.getDataValue("firstName") + " " + this.getDataValue("lastName")
-      )
-    }
   },
   email: {
     type: Sequelize.STRING,
+    unique: true,
     allowNull: false,
     validate: {
       isEmail: true
     }
   },
+  photo: {
+    type: Sequelize.BLOB
+  },
   password: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
   isCurrentHouseMate: {
     type: Sequelize.BOOLEAN,
