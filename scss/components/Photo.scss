@@ -1,0 +1,41 @@
+#photo {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  &-hero {
+    background: antiquewhite;
+    box-shadow: $shadow;
+    padding: 1em;
+
+    button {
+      height: 100%;
+    }
+  }
+
+  &-upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    h4 {
+      margin: 0;
+      text-align: center;
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.6);
+      border-color: rgb(0, 0, 0) !important;
+    }
+  }
+
+  &-crop {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

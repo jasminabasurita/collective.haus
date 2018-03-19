@@ -1,3 +1,4 @@
+// Importing Models and DB file
 const db = require("./_db.js")
 const House = require("./models/House")
 const User = require("./models/User")
@@ -8,6 +9,12 @@ const Message = require("./models/Message")
 
 User.belongsToMany(BillItem, { through: "user-bill" })
 BillItem.belongsToMany(User, { through: "user-bill" })
+
+House.hasMany(User)
+User.belongsTo(House)
+
+BillCategory.belongsTo(House)
+House.hasMany(BillCategory)
 
 Message.belongsTo(User)
 Message.belongsTo(House)
