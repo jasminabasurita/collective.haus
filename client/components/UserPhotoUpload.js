@@ -1,9 +1,9 @@
 import React, { Component } from "react"
-import axios from "axios"
 import { connect } from "react-redux"
 import Dropzone from "react-dropzone"
 import ReactCrop from "react-image-crop"
 import "react-image-crop/lib/ReactCrop.scss"
+import { postProfilePhoto } from "../store"
 
 class UserPhotoUpload extends Component {
   constructor(props) {
@@ -49,16 +49,6 @@ class UserPhotoUpload extends Component {
     console.log(pixelCrop)
   }
 
-  handleSubmit = photo => {
-    const config = {
-        headers: { "content-type": "multipart/form-data" }
-      },
-      data = new FormData()
-    data.append("photo", photo)
-
-    axios.post("/api/photo", data, config)
-  }
-
   render() {
     const { photo, error } = this.state
     return (
@@ -95,6 +85,13 @@ class UserPhotoUpload extends Component {
 }
 
 const mapState = () => ({}),
-  mapDispatch = dispatch => ({})
+  mapDispatch = dispatch => ({
+    handleSubmit(photo) {
+      const data = new FormData()
+      data.append("photo", photo)
+
+      dispatch(postProfilePhoto(data))
+    }
+  })
 
 export default connect(mapState, mapDispatch)(UserPhotoUpload)
