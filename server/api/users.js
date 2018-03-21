@@ -3,7 +3,7 @@ const { User } = require("../db")
 
 router.param("id", (req, res, next, id) => {
   User.findById(id, {
-    attributes: ["id", "username", "email", "isCurrentHouseMate"]
+    attributes: ["id", "username", "email", "photo", "isCurrentHouseMate"]
   })
     .then(user => {
       if (!user) {
@@ -20,7 +20,7 @@ router.param("id", (req, res, next, id) => {
 
 router.get("/", (req, res, next) => {
   User.findAll({
-    attributes: ["id", "username", "email", "isCurrentHouseMate"]
+    attributes: ["id", "username", "email", "photo", "isCurrentHouseMate"]
   })
     .then(users => res.json(users))
     .catch(next)

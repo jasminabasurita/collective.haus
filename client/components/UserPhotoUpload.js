@@ -11,7 +11,8 @@ class UserPhotoUpload extends Component {
     this.state = {
       photo: {},
       error: "",
-      crop: { aspect: 1 }
+      crop: { aspect: 1 },
+      complete: {}
     }
   }
 
@@ -19,7 +20,6 @@ class UserPhotoUpload extends Component {
     if (rejected.length) {
       this.setState({ error: "Error Uploading Photo" })
     } else {
-      console.log(accepted)
       this.setState({
         photo: accepted[0],
         error: ""
@@ -31,26 +31,42 @@ class UserPhotoUpload extends Component {
     this.setState({ crop })
   }
 
-  onImageLoaded = image => {
-    const [smallest, largest] =
-      image.width > image.height ? ["height", "width"] : ["width", "height"]
-    this.setState({
-      crop: {
-        x: 0,
-        y: 0,
-        [smallest]: 100,
-        [largest]: image[smallest] / image[largest] * 100,
-        aspect: 1
-      }
-    })
-  }
+  // onImageLoaded = image => {
+  //   const [smallest, largest] =
+  //     image.width > image.height ? ["height", "width"] : ["width", "height"]
+  //   this.setState({
+  //     crop: {
+  //       x: 0,
+  //       y: 0,
+  //       [smallest]: 100,
+  //       [largest]: image[smallest] / image[largest] * 100,
+  //       aspect: 1
+  //     }
+  //   })
+  // }
 
   handleCropComplete = (crop, pixelCrop) => {
-    console.log(pixelCrop)
+    this.setState({ complete: pixelCrop })
+  }
+
+  handleSubmit = (photo, crop) => {
+    if (Object.keys(crop).length) {
+      crop.left = crop.x
+      crop.top = crop.y
+      delete crop.x
+      delete crop.y
+
+      const data = new FormData()
+      data.append("photo", photo)
+      data.append("crop", JSON.stringify(crop))
+      this.props.handlePhotoData(data)
+    } else {
+      this.setState({ error: "Please Crop Image" })
+    }
   }
 
   render() {
-    const { photo, error } = this.state
+    const { photo, error, complete } = this.state
     return (
       <div id="photo">
         <div id="photo-hero">
@@ -72,9 +88,10 @@ class UserPhotoUpload extends Component {
                 crop={this.state.crop}
                 onChange={this.handleCropChange}
                 onComplete={this.handleCropComplete}
-                onImageLoaded={this.onImageLoaded}
               />
-              <button onClick={() => this.handleSubmit(photo)}>Submit</button>
+              <button onClick={() => this.handleSubmit(photo, complete)}>
+                Submit
+              </button>
             </div>
           )}
           {!!error && <div>{error}</div>}
@@ -86,10 +103,7 @@ class UserPhotoUpload extends Component {
 
 const mapState = () => ({}),
   mapDispatch = dispatch => ({
-    handleSubmit(photo) {
-      const data = new FormData()
-      data.append("photo", photo)
-
+    handlePhotoData(data) {
       dispatch(postProfilePhoto(data))
     }
   })

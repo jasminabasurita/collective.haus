@@ -34,13 +34,15 @@
     "react-dropzone": "^4.2.9",
     "react-emojione": "^5.0.0",
     "react-image-crop": "^3.0.10",
+    "react-image-file": "^0.3.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "sequelize": "^4.28.6",
-    "session": "^0.1.0"
+    "session": "^0.1.0",
+    "sharp": "^0.20.1"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.9.0",

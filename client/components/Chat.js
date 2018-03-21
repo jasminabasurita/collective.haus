@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { postComment } from "../store"
 import { emojify } from "react-emojione"
+import Thumbnail from "./Thumbnail"
 
 function Comments(props) {
   return (
@@ -13,15 +14,20 @@ function Comments(props) {
         <textarea name="text" placeholder="Whatchu gotta say..." />
         <button type="submit">Post</button>
       </form>
-      {props.comments.map(comment => (
-        <div key={comment.id} className="chat-message">
-          <h5 className="user">
-            {!!props.users.length &&
-              props.users.find(user => user.id === comment.userId).name}
-          </h5>
-          <p className="text">{emojify(comment.text)}</p>
-        </div>
-      ))}
+      {!!props.comments.length &&
+        !!props.users.length &&
+        props.comments.map(comment => {
+          const user = props.users.find(user => user.id === comment.userId)
+          return (
+            <div key={comment.id} className="chat-message">
+              <Thumbnail photo={user.photo} />
+              <div>
+                <h5 className="user">{user.username}</h5>
+                <p className="text">{emojify(comment.text)}</p>
+              </div>
+            </div>
+          )
+        })}
     </div>
   )
 }
