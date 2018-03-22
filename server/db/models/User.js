@@ -39,7 +39,7 @@ User.prototype.checkPassword = function(input) {
   return bcrypt.compare(input, this.password)
 }
 
-const setPassword = user => {
+User.setPassword = user => {
   if (user.changed("password")) {
     return bcrypt
       .hash(user.password, 10)
@@ -51,5 +51,5 @@ const setPassword = user => {
   }
 }
 
-User.beforeCreate(setPassword)
-User.beforeUpdate(setPassword)
+User.beforeCreate(User.setPassword)
+User.beforeUpdate(User.setPassword)

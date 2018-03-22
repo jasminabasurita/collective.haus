@@ -9,19 +9,31 @@ describe("User model", () => {
     return db.sync({ force: true })
   })
   describe("instanceMethods", () => {
-    describe("checkPassword", () => {
-      let mayita
+    let mayita
+    beforeEach(() => {
+      return User.create({
+        username: "mayita",
+        email: "mayita@pitty-palace.com",
+        password: "snuggles4lyfe"
+      }).then(user => {
+        mayita = user
+      })
+    })
 
-      beforeEach(() => {
-        return User.create({
-          username: "mayita",
-          email: "mayita@pitty-palace.com",
-          password: "snuggles4lyfe"
-        }).then(user => {
-          mayita = user
+    describe("setPassword", () => {
+      it("does nothing if the password is unchanged", () => {
+        expect(User.setPassword(mayita)).to.equal(undefined)
+      })
+      it("Updating a user returns a user with an encrypted password", () => {
+        const oldPass = mayita.password
+        return mayita.update({ password: "up-the-pups" }).then(user => {
+          expect(user.password).not.to.equal("up-the-pups")
+          expect(user.password).not.to.equal(oldPass)
         })
       })
+    })
 
+    describe("checkPassword", () => {
       it("returns true if the password is correct", () => {
         return mayita
           .checkPassword("snuggles4lyfe")
