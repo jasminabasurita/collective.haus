@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize")
+const bcrypt = require("bcrypt")
 const db = require("../_db.js")
 
 const User = db.define("user", {
@@ -32,3 +33,23 @@ const User = db.define("user", {
 })
 
 module.exports = User
+
+//Validate Password
+User.prototype.checkPassword = function(input) {
+  return bcrypt.compare(input, this.password)
+}
+
+const setPassword = user => {
+  if (user.changed("password")) {
+    return bcrypt
+      .hash(user.password, 10)
+      .then(hash => {
+        user.password = hash
+        return user
+      })
+      .catch(console.error)
+  }
+}
+
+User.beforeCreate(setPassword)
+User.beforeUpdate(setPassword)
