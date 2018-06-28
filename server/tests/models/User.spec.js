@@ -1,7 +1,7 @@
 /* global describe beforeEach it */
 
 const { expect } = require("chai")
-const { db } = require("../../db/index")
+const { db } = require("../../db/")
 const User = db.model("user")
 
 describe("User model", () => {

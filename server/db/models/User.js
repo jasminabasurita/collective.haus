@@ -35,9 +35,7 @@ const User = db.define("user", {
 module.exports = User
 
 //Validate Password
-User.prototype.checkPassword = function(input) {
-  return bcrypt.compare(input, this.password)
-}
+User.prototype.checkPassword = input => bcrypt.compare(input, this.password)
 
 User.setPassword = user => {
   if (user.changed("password")) {
